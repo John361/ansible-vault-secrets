@@ -1,0 +1,12 @@
+- name: Tests - Converge
+  hosts: docker-instance-1
+  become: true
+  tasks:
+    - name: "Tests - Converge - Execute role"
+      ansible.builtin.include_role:
+        name: "{{ playbook_dir }}/../../"
+  vars:
+    vault_address: "http://localhost:8200"
+    vault_username: "vault-user"
+    vault_password: "changeme"
+    vault_mount_path: "my-kv"

@@ -1,0 +1,56 @@
+- name: Tests - Verify
+  hosts: docker-instance-1
+  become: true
+  tasks:
+    # Verify packages installation
+    - name: 1 - Get packages list
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: 1 - Verify packages installation
+      ansible.builtin.assert:
+        that:
+          - "'vault-secrets' in ansible_facts.packages"
+
+
+    # Verify files
+    - name: 1 - Get file information
+      ansible.builtin.stat:
+        path: "/etc/vault-secrets/app.conf.yml"
+      register: file_path
+      failed_when: not file_path.stat.exists
+
+    - name: 1 - Verify file information
+      ansible.builtin.assert:
+        that:
+          - "file_path.stat.pw_name == 'root'"
+          - "file_path.stat.gr_name == 'root'"
+          - "file_path.stat.mode == '0400'"
+
+    - name: 2 - Get file information
+      ansible.builtin.stat:
+        path: "/usr/bin/vault-secrets" # TODO: change path to restrict to only root
+      register: file_path
+      failed_when: not file_path.stat.exists
+
+    - name: 2 - Verify file information
+      ansible.builtin.assert:
+        that:
+          - "file_path.stat.pw_name == 'root'"
+          - "file_path.stat.gr_name == 'root'"
+          - "file_path.stat.mode == '0755'"
+
+
+    # Verify configuration content
+    - name: 1 - Get configuration content
+      ansible.builtin.command: "cat /etc/vault-secrets/app.conf.yml"
+      register: configuration_content
+      changed_when: false
+
+    - name: 1 - Verify configuration content
+      ansible.builtin.assert:
+        that:
+          - "'address: \"http://localhost:8200\"' in configuration_content.stdout"
+          - "'username: \"vault-user\"' in configuration_content.stdout"
+          - "'password: \"changeme\"' in configuration_content.stdout"
+          - "'mount: \"my-kv\"' in configuration_content.stdout"

@@ -1,0 +1,10 @@
+- name: Tests - Prepare
+  hosts: docker-instance-1
+  become: true
+  tasks:
+    - name: Install dependencies
+      ansible.builtin.apt:
+        pkg:
+          - python3-debian
+        state: present
+        update_cache: true
