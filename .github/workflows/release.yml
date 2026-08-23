@@ -59,5 +59,4 @@ jobs:
           ANSIBLE_GALAXY_TOKEN: ${{ secrets.ANSIBLE_GALAXY_TOKEN }}
         run: |
           uv run ansible-galaxy collection publish ${{ env.ARTIFACT_NAME }} \
-            --token ${ANSIBLE_GALAXY_TOKEN} \
-            --wait
+            --token ${ANSIBLE_GALAXY_TOKEN}
