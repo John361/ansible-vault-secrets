@@ -1,7 +1,6 @@
 galaxy_info:
   author: John H
   description: Vault Secrets Ansible installation and configuration
-  readme: README.md
   license_file: LICENSE
   namespace: john361
   company: John361
