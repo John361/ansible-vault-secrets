@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v[0-9]+.*
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: "The version to deploy"
+        required: true
+
+permissions:
+  contents: write
+  id-token: write
+  actions: write
+  pages: write
+
+jobs:
+  release:
+    name: Release to Ansible Galaxy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v9.0.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          working-directory: "./"
+
+      - name: Setup Ansible
+        run: |
+          uv sync
+
+      - name: Ansible Build
+        run: |
+          uv run ansible-galaxy collection build --force
+          echo "ARTIFACT_NAME=$(ls *.tar.gz)" >> ${GITHUB_ENV}
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v3
+        with:
+          files: ${{ env.ARTIFACT_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to Ansible Galaxy
+        env:
+          ANSIBLE_GALAXY_TOKEN: ${{ secrets.ANSIBLE_GALAXY_TOKEN }}
+        run: |
+          uv run ansible-galaxy collection publish ${{ env.ARTIFACT_NAME }} \
+            --token ${ANSIBLE_GALAXY_TOKEN} \
+            --wait
