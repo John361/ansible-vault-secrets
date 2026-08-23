@@ -29,7 +29,7 @@
 
     - name: 2 - Get file information
       ansible.builtin.stat:
-        path: "/usr/bin/vault-secrets" # TODO: change path to restrict to only root
+        path: "/usr/sbin/vault-secrets"
       register: file_path
       failed_when: not file_path.stat.exists
 
@@ -38,7 +38,7 @@
         that:
           - "file_path.stat.pw_name == 'root'"
           - "file_path.stat.gr_name == 'root'"
-          - "file_path.stat.mode == '0755'"
+          - "file_path.stat.mode == '0700'"
 
 
     # Verify configuration content
