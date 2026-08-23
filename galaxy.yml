@@ -1,0 +1,14 @@
+namespace: john361
+name: ansible_vault_secrets
+version: 0.1.0
+readme: README.md
+authors:
+  - John H
+description: "Vault Secrets Ansible installation and configuration"
+license_file: LICENSE
+tags:
+  - security
+  - system
+repository: https://github.com/John361/ansible-vault-secrets
+
+dependencies: {}
