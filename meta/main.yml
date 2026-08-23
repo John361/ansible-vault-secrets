@@ -1,7 +1,6 @@
 galaxy_info:
   author: John H
   description: Vault Secrets Ansible installation and configuration
-  repository: https://github.com/John361/ansible-vault-secrets
   version: 0.1.0
   readme: README.md
   license_file: LICENSE
