@@ -12,3 +12,16 @@ tags:
 repository: https://github.com/John361/ansible-vault-secrets
 
 dependencies: {}
+
+build_ignore:
+  - .idea
+  - .idea/
+  - .venv
+  - .venv/
+  - .git
+  - .git/
+  - .python-version
+  - .gitignore
+  - pyproject.toml
+  - uv.lock
+  - "*.tar.gz"

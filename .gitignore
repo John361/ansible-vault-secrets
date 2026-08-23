@@ -6,6 +6,9 @@
 .env/
 .venv/
 
+# Files
+*.tar.gz
+
 # System files
 .DS_Store
 Thumbs.db
