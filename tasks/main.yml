@@ -1,0 +1,35 @@
+- name: Download gpg key
+  ansible.builtin.get_url:
+    url: https://john361.github.io/vault-secrets/vault-secrets.gpg
+    dest: /etc/apt/trusted.gpg.d/vault-secrets.gpg
+    owner: root
+    group: root
+    mode: "0644"
+
+
+- name: Add repository
+  ansible.builtin.deb822_repository:
+    name: vault-secrets
+    types: [deb]
+    uris: "https://john361.github.io/vault-secrets/"
+    suites: stable
+    components: [main]
+    signed_by: /etc/apt/trusted.gpg.d/vault-secrets.gpg
+    state: present
+
+
+- name: Install
+  ansible.builtin.apt:
+    name: vault-secrets
+    state: present
+    update_cache: true
+
+
+- name: Configure
+  ansible.builtin.template:
+    src: app.conf.yml.j2
+    dest: /etc/vault-secrets/app.conf.yml
+    force: true
+    owner: root
+    group: root
+    mode: "0644"

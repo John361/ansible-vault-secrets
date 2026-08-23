@@ -1,0 +1,24 @@
+argument_specs:
+  main:
+    short_description: Role variables
+    options:
+      vault_address:
+        type: str
+        description: Vault address
+        required: true
+
+      vault_username:
+        type: str
+        description: Vault username
+        required: true
+
+      vault_password:
+        type: str
+        description: Vault password
+        required: true
+        no_log: true
+
+      vault_mount_path:
+        type: str
+        description: Vault mount path
+        required: true
