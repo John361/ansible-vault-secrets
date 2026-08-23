@@ -3,7 +3,7 @@ galaxy_info:
   description: Vault Secrets Ansible installation and configuration
   namespace: john361
   company: John361
-  role_name: ansible_vault_secrets
+  role_name: vault_secrets
   min_ansible_version: "2.17"
 
   platforms:
