@@ -1,0 +1,11 @@
+# IDE
+.idea/
+.vscode/
+
+# App folders
+.env/
+.venv/
+
+# System files
+.DS_Store
+Thumbs.db
