@@ -1,6 +1,6 @@
 namespace: john361
 name: ansible_vault_secrets
-version: 0.1.4
+version: 0.1.5
 readme: README.md
 authors:
   - John H

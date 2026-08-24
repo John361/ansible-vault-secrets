@@ -49,15 +49,6 @@ jobs:
         run: |
           uv run --frozen --no-build antsibull-changelog release
 
-      - name: Commit and push
-        uses: stefanzweifel/git-auto-commit-action@4b4693c596717de5c939cfa92b1b0b5c8676537f
-        with:
-          commit_message: Update changelog
-          file_pattern: CHANGELOG.md
-          branch: ${{ github.event.pull_request.head.ref || github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Ansible Build
         run: |
           uv run --frozen --no-build ansible-galaxy collection build --force
@@ -76,3 +67,12 @@ jobs:
             --token ${ANSIBLE_GALAXY_TOKEN}
         env:
           ANSIBLE_GALAXY_TOKEN: ${{ secrets.ANSIBLE_GALAXY_TOKEN }}
+
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@4b4693c596717de5c939cfa92b1b0b5c8676537f
+        with:
+          commit_message: Update changelog
+          file_pattern: CHANGELOG.md
+          branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
