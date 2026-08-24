@@ -4,7 +4,7 @@
   tasks:
     - name: "Tests - Converge - Execute role"
       ansible.builtin.include_role:
-        name: "{{ playbook_dir }}/../../"
+        name: vault_secrets
   vars:
     vault_address: "http://localhost:8200"
     vault_username: "vault-user"
