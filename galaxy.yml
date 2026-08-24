@@ -1,12 +1,10 @@
 namespace: john361
 name: ansible_vault_secrets
-version: 0.1.5
+version: 0.1.6
 readme: README.md
 authors:
   - John H
 description: "Vault Secrets Ansible installation and configuration"
-license:
-  - AGPL-3.0-only
 license_file: LICENSE
 tags:
   - security
