@@ -54,6 +54,7 @@ jobs:
         with:
           commit_message: Update changelog
           file_pattern: CHANGELOG.md
+          branch: ${{ github.event.pull_request.head.ref || github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
