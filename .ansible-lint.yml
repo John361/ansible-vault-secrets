@@ -1,0 +1,13 @@
+---
+# .ansible-lint
+
+profile: production # min, basic, moderate, safety, shared, production
+
+exclude_paths:
+  - .venv/
+  - .github/
+  - .ansible/
+  - changelogs/
+
+skip_list:
+  - var-naming

@@ -5,6 +5,8 @@ readme: README.md
 authors:
   - John H
 description: "Vault Secrets Ansible installation and configuration"
+license:
+  - AGPL-3.0-only
 license_file: LICENSE
 tags:
   - security
@@ -20,6 +22,8 @@ build_ignore:
   - .venv/
   - .git
   - .git/
+  - .ansible
+  - .ansible/
   - .python-version
   - .gitignore
   - pyproject.toml

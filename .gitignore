@@ -5,6 +5,7 @@
 # App folders
 .env/
 .venv/
+.ansible/
 
 # Files
 *.tar.gz
