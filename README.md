@@ -1,4 +1,7 @@
 [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=John361_ansible-vault-secrets&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=John361_ansible-vault-secrets)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=John361_ansible-vault-secrets&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=John361_ansible-vault-secrets)
+[![software_quality_security_issues](https://sonarcloud.io/api/project_badges/measure?project=John361_ansible-vault-secrets&metric=software_quality_security_issues)](https://sonarcloud.io/summary/new_code?id=John361_ansible-vault-secrets)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=John361_ansible-vault-secrets&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=John361_ansible-vault-secrets)
 
 # Ansible Vault Secrets
 Ansible role for deploying [Vault Secrets](https://github.com/John361/vault-secrets) at scale.
