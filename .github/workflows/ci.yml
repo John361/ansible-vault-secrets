@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  pull-requests: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@f548e57e544e1ff5a4c46bf1e1b8685f8e4a348a
+        with:
+          fetch-depth: 0
+
+      # Ansible
+      - name: Setup Python
+        uses: actions/setup-python@751276eafca55f10f252026015f43c488f2322ba
+        with:
+          python-version: "3.14"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@19b4d1e990bec64818914c40230bde93a0de300b
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          working-directory: "./"
+
+      - name: Install python dependencies
+        run: |
+          uv sync --frozen --no-build
+
+      - name: Run Ansible linter
+        run: |
+          uv run --frozen --no-build ansible-lint -c .ansible-lint.yml
