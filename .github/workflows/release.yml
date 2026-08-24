@@ -42,11 +42,23 @@ jobs:
 
       - name: Setup Ansible
         run: |
-          uv sync
+          uv sync --frozen --no-build
+
+      - name: Generate changelog
+        run: |
+          uv run --frozen --no-build antsibull-changelog release
+
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@4b4693c596717de5c939cfa92b1b0b5c8676537f
+        with:
+          commit_message: Update changelog
+          file_pattern: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Ansible Build
         run: |
-          uv run ansible-galaxy collection build --force
+          uv run --frozen --no-build ansible-galaxy collection build --force
           echo "ARTIFACT_NAME=$(ls *.tar.gz)" >> ${GITHUB_ENV}
 
       - name: Upload Release Asset
@@ -58,7 +70,7 @@ jobs:
 
       - name: Publish to Ansible Galaxy
         run: |
-          uv run ansible-galaxy collection publish ${{ env.ARTIFACT_NAME }} \
+          uv run --frozen --no-build ansible-galaxy collection publish ${{ env.ARTIFACT_NAME }} \
             --token ${ANSIBLE_GALAXY_TOKEN}
         env:
           ANSIBLE_GALAXY_TOKEN: ${{ secrets.ANSIBLE_GALAXY_TOKEN }}
