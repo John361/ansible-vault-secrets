@@ -7,6 +7,12 @@ argument_specs:
         description: Vault address
         required: true
 
+      vault_token:
+        type: str
+        description: Vault token
+        required: true
+        no_log: true
+
       vault_username:
         type: str
         description: Vault username
@@ -18,7 +24,51 @@ argument_specs:
         required: true
         no_log: true
 
-      vault_mount_path:
-        type: str
-        description: Vault mount path
+      export_mounts:
+        type: list
+        elements: dict
         required: true
+        description: Vault export mount paths
+        options:
+          name:
+            type: str
+            required: true
+            description: Mount path name
+          engine:
+            type: str
+            required: true
+            choices:
+              - "Kv1"
+              - "Kv2"
+              - "Cubbyhole"
+            description: Secret engine type
+
+      import_mounts:
+        type: list
+        elements: dict
+        required: true
+        description: Vault import mount paths
+        options:
+          name:
+            type: str
+            required: true
+            description: Mount path name
+          engine:
+            type: str
+            required: true
+            choices:
+              - "Kv1"
+              - "Kv2"
+              - "Cubbyhole"
+            description: Secret engine type
+
+      request_interval_ms:
+        type: int
+        description: Request interval ms
+        required: true
+
+      encryption_passphrase:
+        type: str
+        description: Encryption passphrase
+        required: true
+        no_log: true

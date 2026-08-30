@@ -18,7 +18,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Ansible
       - name: Setup Python
         uses: actions/setup-python@751276eafca55f10f252026015f43c488f2322ba
         with:
@@ -42,4 +41,4 @@ jobs:
       - name: Run Molecule tests
         run: |
           cd roles/vault_secrets
-          uv run molecule test
+          uv run --frozen --no-build molecule test
