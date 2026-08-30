@@ -41,4 +41,4 @@ jobs:
       - name: Run Molecule tests
         run: |
           cd roles/vault_secrets
-          uv run molecule test
+          uv run --frozen --no-build molecule test
