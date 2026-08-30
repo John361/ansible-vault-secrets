@@ -1,5 +1,35 @@
-vault:
+# Connection information:
+# - Either use token or username / password
+#
+# Mount information:
+# - On import command, if the mount paths do not exist, make sure you have enough permissions to create them
+#
+# Request interval information:
+# - Time between each request (for example when importing or exporting massive mounts paths)
+# - Used to avoid rate limiting issues
+#
+# Encryption passphrase
+# - Used only for export and import
+# - You can keep it empty for find
+connection:
   address: "{{ vault_address }}"
-  username: "{{ vault_username }}"
-  password: "{{ vault_password }}"
-  mount: "{{ vault_mount_path }}"
+  mode:
+{% if vault_token != "" %}
+    token: "{{ vault_token }}"
+{% else %}
+    userpass:
+      username: "{{ vault_username }}"
+      password: "{{ vault_password }}"
+{% endif %}
+
+find:
+  encode: true
+
+export:
+  mounts: {{ export_mounts }}
+
+import:
+  mounts: {{ import_mounts }}
+
+request_interval_ms: {{ request_interval_ms }}
+encryption_passphrase: "{{ encryption_passphrase }}"

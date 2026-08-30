@@ -51,6 +51,10 @@
       ansible.builtin.assert:
         that:
           - "'address: \"http://localhost:8200\"' in configuration_content.stdout"
+          - "'token:' not in configuration_content.stdout"
           - "'username: \"vault-user\"' in configuration_content.stdout"
           - "'password: \"changeme\"' in configuration_content.stdout"
-          - "'mount: \"my-kv\"' in configuration_content.stdout"
+          - "'vault-secrets-dev-1' in configuration_content.stdout"
+          - "'Kv2' in configuration_content.stdout"
+          - "'request_interval_ms: 200' in configuration_content.stdout"
+          - "'encryption_passphrase: \"changeme\"' in configuration_content.stdout"

@@ -1,4 +1,8 @@
 vault_address: ""
+vault_token: ""
 vault_username: ""
 vault_password: ""
-vault_mount_path: ""
+export_mounts: []
+import_mounts: []
+request_interval_ms: 0
+encryption_passphrase: ""
